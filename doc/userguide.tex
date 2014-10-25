@@ -1,0 +1,118 @@
+\documentclass{article}
+
+\usepackage{a4wide}
+\usepackage{tabularx}
+\title{VM8051 User Guide}
+\author{Luk Bettale}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Introduction}
+AS8051 is a 2 passes assembler for 8051 assembly language. In addition
+to the classical 8051 assembly, this assembler supports some
+directives and macro instructions that are detailed hereafter.
+
+\section*{Using \texttt{as8051}}
+AS8051 can be launched by command line. The assembly input file has to
+be specified as first argument. The \texttt{-b} option instructs the
+ASM to output in plain binary format instead of HEX format.
+
+\begin{verbatim}
+as8051 [-b] input
+\end{verbatim}
+
+\section*{Assembler Macro Instructions}
+Two macro instructions are supported: \texttt{jmp} and
+\texttt{call}. When using \texttt{jmp} (resp. \texttt{call}, if the
+label is a backward reference, these macros expands to the most
+suitable between \texttt{sjmp}, \texttt{ajmp}, \texttt{ljmp}
+(resp. \texttt{acall}, \texttt{lcall}). If the reference is forward,
+expands to \texttt{ljmp} (resp. \texttt{lcall}).
+
+\section*{Assembler directives}
+The following directives are supported:
+
+\noindent
+\begin{tabularx}{\textwidth}{rX}
+  \texttt{SEGMENT}&Declares a new segment in one of the 4 memory
+  locations (CODE, DATA, XDATA, BIT)\\
+  &\texttt{globvars SEGMENT XDATA}\\
+  \noalign{\smallskip}
+  \hline
+  \noalign{\smallskip}
+  \texttt{RSEG}&Effectively use a previously declared segment (for the
+  following lines until another segment change)\\
+  &\texttt{\ \ \ \ RSEG globvars}\\
+  \noalign{\smallskip}
+  \hline
+  \noalign{\smallskip}
+  \texttt{ORG}&Specifies the location of the following lines in
+  code. This is used to place code at specific locations.\\
+  &\texttt{\ \ \ \ RSEG 0x0100 ;; following code starts at address 0x0100}\\
+  \noalign{\smallskip}
+  \hline
+  \noalign{\smallskip}
+  \texttt{DSEG}&Switch to data segment (first available)\\
+  &\texttt{\ \ \ \ DSEG}\\
+  \noalign{\smallskip}
+  \hline
+  \noalign{\smallskip}
+  \texttt{XSEG}&Switch to xdata segment (first available)\\
+  &\texttt{\ \ \ \ XSEG}\\
+  \noalign{\smallskip}
+  \hline
+  \noalign{\smallskip}
+  \texttt{BSEG}&Switch to bit addressable data segment (first available)\\
+  &\texttt{\ \ \ \ BSEG}\\
+  \noalign{\smallskip}
+  \hline
+  \noalign{\smallskip}
+  \texttt{CSEG}&Switch to code segment (first available)\\
+  &\texttt{\ \ \ \ CSEG}\\
+  \noalign{\smallskip}
+  \hline
+  \noalign{\smallskip}
+  \texttt{AT}&Used with one of the 4 previous directives, specifies
+  the location of the segment instead of switching to the first
+  available. Note that \texttt{CSEG AT} becomes equivalent to \texttt{ORG}.\\
+  &\texttt{\ \ \ \ XSEG AT 0x0080}\\
+  \noalign{\smallskip}
+  \hline
+  \noalign{\smallskip}
+  \texttt{DS}&Reserve some space in the current segment (not initialized).\\
+  &\texttt{\ \ \ \ DS 8 ; reserve 8 bytes}\\
+  \noalign{\smallskip}
+  \hline
+  \noalign{\smallskip}
+  \texttt{DBIT}&Reserve some bits in the current segment (only for bit
+  addressable data segment).\\
+  &\texttt{\ \ \ \ DBIT 5 ; reserve 5 bits}\\
+  \noalign{\smallskip}
+  \hline
+  \noalign{\smallskip}
+  \texttt{EQU}&Declares a constant.\\
+  &\texttt{myconst EQU 38+4 ; myconst expands to 42}\\
+  \noalign{\smallskip}
+  \hline
+  \noalign{\smallskip}
+  \texttt{SET}&Declares a value that can change within the file.\\
+  &\texttt{myvar SET 4 ; myvar expands to 4}\\
+  &\texttt{myvar SET myvar+1 ; now myvar expands to 5}\\
+  \noalign{\smallskip}
+  \hline
+  \noalign{\smallskip}
+  \texttt{USING}&Change register bank for expansion of the ARi\\
+  &\texttt{\ \ \ \ USING 3 ; now AR0 equals to 0x18 (third register bank)}\\
+  \noalign{\smallskip}
+  \hline
+  \noalign{\smallskip}
+  \texttt{END}&Marks the end of the file. What follows is not considered.\\
+  &\texttt{\ \ \ \ END}\\
+  \noalign{\smallskip}
+  \hline
+\end{tabularx}
+
+\end{document}
