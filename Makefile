@@ -31,10 +31,10 @@ install: $(TARGETS)
 clean:
 	rm -f $(OBJFILES) $(TARGETS) y.tab.h
 
-%.bin: %.asm as8051
+%.hex: %.asm as8051
 	./as8051 $< >$@ || rm -f $@
 
-%.run: %.bin vm8051
-	./vm8051 $< 0
+%.bin: %.asm as8051
+	./as8051 -b $< >$@ || rm -f $@
 
 .PHONY: all clean
