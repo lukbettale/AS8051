@@ -38,12 +38,17 @@ parser8051_inst_process (struct parser8051_context *parser8051,
     fprint_op (stdout, &IR[3 - len], COUNTER (parser8051));
   else
     fprintf (stdout, "DB    0x%02X                      ", opcode & 0xFF);
-  fprintf (stdout, "        ; ");
+  fprintf (stdout, "        ;; ");
+  fprintf (stdout, "l.%d", 1 + parser8051->line_no);
+#ifdef PRINT_OPCODE
+  fprintf (stdout, "  (opcode = 0x");
   if (len == 3)
     fprintf (stdout, "%02X", (opcode >> 16) & 0xFF);
   if (len >= 2)
     fprintf (stdout, "%02X", (opcode >> 8) & 0xFF);
   fprintf (stdout, "%02X", opcode & 0xFF);
+  fprintf (stdout, ")");
+#endif  /* PRINT_OPCODE */
   fprintf (stdout, "\n");
 
   return opcode;
