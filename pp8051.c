@@ -1,4 +1,4 @@
-/* Copyright (C) 2013, 2014 Luk Bettale
+/* Copyright (C) 2013, 2014, 2016 Luk Bettale
 
    This program is free software: you can redistribute it and/or
    modify it under the terms of the GNU General Public License as
@@ -84,6 +84,7 @@ int main (int argc, char *argv[])
 
   n = yyparse ();
 
+  fclose (yyin);
   free (parser8051);
 
   return n;
