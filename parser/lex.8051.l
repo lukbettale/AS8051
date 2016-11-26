@@ -1,4 +1,4 @@
-/* Copyright (C) 2013 Luk Bettale
+/* Copyright (C) 2013, 2016 Luk Bettale
 
    This program is free software: you can redistribute it and/or
    modify it under the terms of the GNU General Public License as
@@ -254,10 +254,10 @@ res_word (char *s)
   if (strcmp (s, "RSH") == 0 || strcmp (s, "rsh") == 0)
     return RSH;
 
-  /* if (strcmp (s, "HIGH") == 0 || strcmp (s, "high") == 0) */
-  /*   return HIGH; */
-  /* if (strcmp (s, "LOW") == 0 || strcmp (s, "low") == 0) */
-  /*   return LOW; */
+  if (strcmp (s, "HIGH") == 0 || strcmp (s, "high") == 0)
+    return HIGH;
+  if (strcmp (s, "LOW") == 0 || strcmp (s, "low") == 0)
+    return LOW;
 
   if (strcmp (s, "END") == 0 || strcmp (s, "end") == 0)
     return END;
