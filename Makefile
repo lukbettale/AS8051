@@ -6,7 +6,7 @@ YFLAGS = -d
 
 PREFIX ?= /usr/local
 
-EXE = as8051 pp8051
+EXE = as8051 pp8051 inst8051
 TARGETS = $(EXE)
 
 PRINTOBJ = print/lib8051print.o
@@ -23,6 +23,9 @@ as8051: $(PARSEROBJ) $(LEXYACCOBJ)
 
 pp8051: LDLIBS += -lfl
 pp8051: $(PARSEROBJ) $(LEXYACCOBJ) $(PRINTOBJ)
+
+inst8051: LDLIBS += -lfl
+inst8051: $(PARSEROBJ) $(LEXYACCOBJ)
 
 install: $(TARGETS)
 	mkdir -p $(PREFIX)/bin
