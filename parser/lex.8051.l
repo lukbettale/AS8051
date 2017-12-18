@@ -25,7 +25,7 @@
 extern struct parser8051_context *parser8051;
 
 static int yyerror (char *s);
-
+extern int yylval;
 static int sym_lookup (char *s);
 static int res_word (char *s);
 %}
