@@ -1,4 +1,4 @@
-/* Copyright (C) 2013, 2014 Luk Bettale
+/* Copyright (C) 2013, 2014, 2021 Luk Bettale
 
    This program is free software: you can redistribute it and/or
    modify it under the terms of the GNU General Public License as
@@ -19,8 +19,7 @@
 
 #include "parser8051.h"
 
-#define yyparse scan_yyparse
-#define yyerror scan_yyerror
+#include "scan8051def.h"
 
 int yyerror (char *s);
 

@@ -11,7 +11,7 @@ TARGETS = $(EXE)
 
 PRINTOBJ = print/lib8051print.o
 
-LEXYACCOBJ = parser/yacc.8051.o parser/yacc.scan_8051.o parser/lex.8051.o
+LEXYACCOBJ = parser/yacc.8051.o parser/yacc.scan_8051.o parser/lex.8051.o parser/lex.scan_8051.o
 PARSEROBJ = parser/parser8051.o
 
 OBJFILES = $(PRINTOBJ) $(LEXYACCOBJ) $(PARSEROBJ) $(SRCFILES:.c=.o)
@@ -33,6 +33,8 @@ install: $(TARGETS)
 
 clean:
 	rm -f $(OBJFILES) $(TARGETS) y.tab.h
+
+parser/lex.scan_8051.o: parser/lex.8051.c
 
 %.hex: %.asm as8051
 	./as8051 $< >$@ || rm -f $@

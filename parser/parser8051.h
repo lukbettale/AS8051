@@ -1,4 +1,4 @@
-/* Copyright (C) 2013, 2014 Luk Bettale
+/* Copyright (C) 2013, 2014, 2021 Luk Bettale
 
    This program is free software: you can redistribute it and/or
    modify it under the terms of the GNU General Public License as
@@ -71,6 +71,7 @@ struct parser8051_context
 
 /* defined by yacc */
 extern FILE *yyin;
+extern FILE *scan_yyin;
 extern int scan_yyparse (void);
 extern int yyparse (void);
 

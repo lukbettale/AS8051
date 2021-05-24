@@ -1,4 +1,4 @@
-/* Copyright (C) 2013, 2014, 2016 Luk Bettale
+/* Copyright (C) 2013, 2014, 2016, 2021 Luk Bettale
 
    This program is free software: you can redistribute it and/or
    modify it under the terms of the GNU General Public License as
@@ -64,7 +64,7 @@ int main (int argc, char *argv[])
       return -1;
     }
 
-  yyin = fopen (argv[1], "r");
+  yyin = scan_yyin = fopen (argv[1], "r");
   if (yyin == NULL)
     {
       fprintf (stderr, "invalid filename: %s\n", argv[1]);

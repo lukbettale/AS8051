@@ -1,4 +1,4 @@
-/* Copyright (C) 2013, 2016 Luk Bettale
+/* Copyright (C) 2013, 2016, 2021 Luk Bettale
 
    This program is free software: you can redistribute it and/or
    modify it under the terms of the GNU General Public License as
@@ -19,8 +19,6 @@
 #include "y.tab.h"
 
 #include "parser8051.h"
-
-#define yyerror lex_yyerror
 
 extern struct parser8051_context *parser8051;
 
